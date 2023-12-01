@@ -7,7 +7,7 @@ import { data } from "./components/data";
 function App() {
   return (
     <main className="relative flex h-screen w-full items-center justify-center text-white">
-      <div className="flex w-full max-w-[370px] flex-col items-center justify-center p-5">
+      <div className="flex w-full max-w-[410px] flex-col items-center justify-center p-6 sm:mt-[15vh]">
         <ThreadLogo />
         {/* header  */}
         <p className="mb-4 font-bold">Log in with your Instagram account</p>
@@ -15,19 +15,19 @@ function App() {
         <div className="flex w-full flex-col items-center justify-center  ">
           <input
             type="text"
-            className="mb-2 w-full rounded-lg bg-[#1e1e1e] p-4 text-[15px] text-sm text-white placeholder:text-[#777777]"
+            className="mb-2 w-full rounded-lg border-[#f3f5f7] bg-[#1e1e1e] p-4 text-[15px] text-sm text-white outline-none placeholder:text-[15px] placeholder:text-[#777777]  sm:rounded-xl"
             placeholder="Username, Phone number or email address"
           />
           <input
             type="password"
-            className="mb-2 w-full rounded-lg bg-[#1e1e1e] p-4 text-[15px] text-sm text-white placeholder:text-[#777777]"
+            className="mb-2 w-full rounded-lg bg-[#1e1e1e] p-4 text-[15px] text-sm text-white outline-none placeholder:text-[15px] placeholder:text-[#777777] focus:outline-[1px] focus:outline-[#1e1e1e] sm:rounded-xl"
             placeholder="Password"
           />
-          <button className="mb-4 w-full rounded-lg bg-white p-4 text-[15px] text-[#777777]">
+          <button className="mb-4 w-full rounded-lg bg-white p-4 text-[15px] text-[#777777] outline-none sm:rounded-xl">
             Log in
           </button>
         </div>
-        <p className="mb-5 text-[15px] text-[#777777]">Forgot password ?</p>
+        <p className="mb-5 text-[15px] text-[#777777]">Forgotten password ?</p>
         <div className="text-[#777777]">
           <p className="mb-5 flex items-center justify-center before:absolute before:w-[140px] before:-translate-x-[67%] before:border-t-2 before:border-[#1e1e1e] before:content-[''] after:absolute after:w-[140px] after:translate-x-[67%] after:border-t-2 after:border-[#1e1e1e] after:content-['']">
             or
