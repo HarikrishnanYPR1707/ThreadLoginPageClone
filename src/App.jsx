@@ -6,7 +6,8 @@ import { data } from "./components/data";
 
 function App() {
   return (
-    <main className="relative flex h-screen w-full items-center justify-center text-white">
+    <main className="flex h-screen w-full flex-col items-center justify-center text-white">
+      {/* Image Component */}
       <div className="flex w-full max-w-[410px] flex-col items-center justify-center p-6 sm:mt-[15vh]">
         <ThreadLogo />
         {/* header  */}
@@ -44,7 +45,16 @@ function App() {
         </button>
       </div>
       <FooterComponent />
+      <QrCode />
     </main>
+  );
+}
+
+function ImageComponent() {
+  return (
+    <div className="absolute top-0 -z-10 w-[1785px] border">
+      <img src="./Image.webp" alt="" />
+    </div>
   );
 }
 
