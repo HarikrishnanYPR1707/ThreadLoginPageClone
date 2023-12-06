@@ -4,8 +4,13 @@ const SvgComp = () => {
   return (
     <div className="absolute bottom-7 right-7 hidden text-[13px] text-[#777777] md:flex md:flex-col md:items-center md:justify-center">
       <p className="pb-4">Scan to get the app</p>
-      <div className="rounded-2xl border-[1px] border-[#383939] bg-[#181818] p-4">
-        <div className="w-[86px] lg:w-[106px] xl:w-[115px] 2xl:w-[131px]">
+      <div
+        className="rounded-2xl border-[1px] border-[#383939] bg-[#181818] p-4 duration-200 hover:scale-110"
+        onClick={() => {
+          console.log("What up???");
+        }}
+      >
+        <div className="w-[86px] lg:w-[106px]  xl:w-[115px] 2xl:w-[131px]">
           <svg viewBox="-1 -1 31 31" xmlns="http://www.w3.org/2000/svg">
             <rect
               fill="transparent"
@@ -26,8 +31,17 @@ const SvgComp = () => {
           </svg>
         </div>
       </div>
+      {/* <QrModel /> */}
     </div>
   );
 };
+
+function QrModel() {
+  return (
+    <div className="absolute left-0 top-0 h-[500px] w-[500px] border">
+      Hello world
+    </div>
+  );
+}
 
 export default SvgComp;
