@@ -1,9 +1,9 @@
-import "./App.css";
-import ThreadLogo from "./components/ThreadLogoSvg";
-import "./App.css";
-import { data } from "./components/data";
 import { useState } from "react";
+import "./App.css";
 import QrCodeSvg from "./components/QrCode";
+import ThreadLogo from "./components/ThreadLogoSvg";
+import { data } from "./components/data";
+import { FaLink } from "react-icons/fa6";
 
 function App() {
   const [activeQrModel, setActiveQrModel] = useState(false);
@@ -179,13 +179,20 @@ function ReportProblem({
             <span className="absolute inset-0 m-auto h-[1px] w-[20px] rotate-45 bg-gray-100"></span>
             <span className="absolute inset-0 m-auto h-[1px] w-[20px] -rotate-45 bg-gray-100"></span>
           </div>
-          <div className="w-[308px] rounded-[26px] border-[1px] border-[#383939] bg-[#181818] p-8">
-            <div className="">
-              <QrCodeSvg />
-              jj
+          <p className="mb-3 text-center font-bold">Report a problem</p>
+          <div className="w-[340px] rounded-[26px] border-[1px] border-[#383939] bg-[#181818] p-8">
+            <textarea
+              name="postContent"
+              rows={4}
+              cols={40}
+              placeholder="Please include as many detail as possible.."
+              className="mb-5 resize-none border bg-[#181818] text-sm text-[#878787] outline-none placeholder:text-[#777777]"
+            />
+            <div className="flex w-full items-center justify-between">
+              <FaLink />
+              <button>Submit</button>
             </div>
           </div>
-          <p className="mt-3 text-center font-bold">Get the app</p>
         </div>
       ) : null}
     </>
