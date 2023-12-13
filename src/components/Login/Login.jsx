@@ -10,6 +10,7 @@ function Login() {
   const [activeReportProblemModel, setActiveReportProblemModel] =
     useState(false);
   const [reportProblemValue, setReportProblemValue] = useState("");
+  const [inputUserName, setInputUserName] = useState("");
   const [inputPasswordValue, setInputPasswordValue] = useState("");
 
   return (
@@ -24,6 +25,9 @@ function Login() {
         <div className="flex w-full flex-col items-center justify-center  ">
           <input
             type="text"
+            onChange={(e) => {
+              setInputUserName(e.target.value);
+            }}
             className="mb-2 w-full rounded-lg border-[#f3f5f7] bg-[#1e1e1e] p-4 text-[15px] text-sm text-white outline-none placeholder:text-[15px] placeholder:text-[#777777] focus:outline-[1px] focus:outline-offset-0 focus:outline-[#383838] sm:rounded-xl"
             placeholder="Username, Phone number or email address"
           />
@@ -37,7 +41,7 @@ function Login() {
           />
           <button
             className={`mb-4 w-full rounded-lg bg-white p-4 text-[15px] outline-none sm:rounded-xl ${
-              inputPasswordValue.length == 0
+              inputPasswordValue.length == 0 || inputUserName.length == 0
                 ? "cursor-no-drop text-[#777777]"
                 : "font-medium text-black"
             }`}
@@ -246,7 +250,7 @@ function ReportProblem({
                     setReportProblemValue(e.target.value);
                   }}
                   placeholder="Please include as many detail as possible..."
-                  className="mb-5 h-[101px] w-full resize-none border-none bg-[#181818] text-sm text-white outline-none placeholder:text-[#777777]"
+                  className="mb-5 h-[101px] w-full resize-none border-none bg-[#181818] text-[15px] text-white outline-none placeholder:text-[#777777]"
                 />
                 <div className="flex w-full items-center justify-between">
                   <GoPaperclip className="cursor-pointer text-[#777777]" />
