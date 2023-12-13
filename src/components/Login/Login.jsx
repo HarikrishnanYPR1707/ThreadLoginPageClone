@@ -37,9 +37,9 @@ function Login() {
           />
           <button
             className={`mb-4 w-full rounded-lg bg-white p-4 text-[15px] outline-none sm:rounded-xl ${
-              inputPasswordValue.length > 0
-                ? "font-medium text-black"
-                : "text-[#777777]"
+              inputPasswordValue.length == 0
+                ? "cursor-no-drop text-[#777777]"
+                : "font-medium text-black"
             }`}
           >
             Log in
@@ -254,7 +254,7 @@ function ReportProblem({
                     className={`rounded-lg border-[1px] border-[#444444] px-4 py-1 text-center font-medium ${
                       reportProblemValue.length == 0
                         ? "cursor-no-drop text-[#777777]"
-                        : "cursor-pointer text-white"
+                        : "text-white"
                     }`}
                   >
                     Submit
