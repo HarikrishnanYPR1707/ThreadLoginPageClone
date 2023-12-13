@@ -209,11 +209,16 @@ function ReportProblem({
   reportProblemValue,
   setReportProblemValue,
 }) {
+  const handleOnClose = () => {
+    setActiveReportProblemModel(false);
+  };
+
   return (
     <>
       <AnimatePresence>
         {activeReportProblemModel ? (
           <motion.div
+            onClick={handleOnClose}
             className="absolute grid h-full w-full place-content-center bg-[#101010] bg-opacity-90 text-white opacity-0 backdrop-blur-xl"
             animate={{
               opacity: 1,
@@ -223,13 +228,16 @@ function ReportProblem({
             }}
           >
             <div
-              onClick={() => setActiveReportProblemModel(false)}
+              onClick={handleOnClose}
               className="absolute left-[25px] top-[25px] flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full bg-[#181818] p-3 text-sm duration-200 hover:scale-110"
             >
               <span className="absolute inset-0 m-auto h-[1px] w-[20px] rotate-45 bg-[#777777]"></span>
               <span className="absolute inset-0 m-auto h-[1px] w-[20px] -rotate-45 bg-[#777777]"></span>
             </div>
-            <div className="flex w-[400px] flex-col items-center justify-center">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="flex w-[400px] flex-col items-center justify-center"
+            >
               <p className="mb-5 text-center font-bold">Report a problem</p>
               <div className="w-full max-w-[390px] rounded-2xl border-[1px] border-[#383939] bg-[#181818] p-6">
                 <textarea
@@ -243,11 +251,11 @@ function ReportProblem({
                 <div className="flex w-full items-center justify-between">
                   <GoPaperclip className="cursor-pointer text-[#777777]" />
                   <button
-                    className={
-                      reportProblemValue.length > 0
-                        ? "rounded-lg border-[1px] border-[#777777] px-4 py-1 text-center font-medium text-white"
-                        : "rounded-lg border-[1px] border-[#444444] px-4 py-1 text-center font-medium text-[#777777]"
-                    }
+                    className={`rounded-lg border-[1px] border-[#444444] px-4 py-1 text-center font-medium ${
+                      reportProblemValue.length == 0
+                        ? "cursor-no-drop text-[#777777]"
+                        : "cursor-pointer text-white"
+                    }`}
                   >
                     Submit
                   </button>
