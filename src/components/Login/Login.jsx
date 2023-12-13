@@ -13,6 +13,7 @@ function Login() {
   return (
     <main className="flex h-screen w-full flex-col items-center justify-center text-white">
       {/* Image Component */}
+      <ImageComponent />
       <div className="flex w-full max-w-[410px] flex-col items-center justify-center p-6 sm:mt-[15vh]">
         <ThreadLogo />
         {/* header  */}
@@ -73,7 +74,7 @@ function Login() {
 
 function ImageComponent() {
   return (
-    <div className="absolute top-0 -z-10 w-[1785px] border">
+    <div className="fixed top-0 -z-10 w-[1785px]">
       <img src="./Image.webp" alt="" />
     </div>
   );
@@ -131,7 +132,6 @@ function QrCode({ activeQrModel, setActiveQrModel }) {
         className="rounded-2xl border-[1px] border-[#383939] bg-[#181818] p-4 duration-200 hover:scale-110"
         onClick={() => {
           setActiveQrModel(!activeQrModel);
-          console.log(activeQrModel);
         }}
       >
         <div className="w-[86px] lg:w-[106px]  xl:w-[115px] 2xl:w-[131px]">
