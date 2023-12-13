@@ -35,9 +35,6 @@ function Login() {
             className="mb-2 w-full rounded-lg bg-[#1e1e1e] p-4 text-[15px] text-sm text-white outline-none placeholder:text-[15px] placeholder:text-[#777777] focus:outline-[1px] focus:outline-offset-0 focus:outline-[#383838] sm:rounded-xl"
             placeholder="Password"
           />
-          {/* <button className={inputPasswordValue.length > 0 ? "mb-4 w-full rounded-lg bg-white p-4 text-[15px] text-[#777777] outline-none sm:rounded-xl" : "mb-4 w-full rounded-lg bg-white p-4 text-[15px] text-[#777777] outline-none sm:rounded-xl"}>
-            Log in
-          </button> */}
           <button
             className={`mb-4 w-full rounded-lg bg-white p-4 text-[15px] outline-none sm:rounded-xl ${
               inputPasswordValue.length > 0
@@ -48,7 +45,9 @@ function Login() {
             Log in
           </button>
         </div>
-        <p className="mb-5 text-[15px] text-[#777777]">Forgotten password ?</p>
+        <p className="mb-5 cursor-pointer text-[15px] text-[#777777]">
+          Forgotten password ?
+        </p>
         <div className="text-[#777777]">
           <p className="mb-5 flex items-center justify-center before:absolute before:w-[140px] before:-translate-x-[67%] before:border-t-2 before:border-[#1e1e1e] before:content-[''] after:absolute after:w-[140px] after:translate-x-[67%] after:border-t-2 after:border-[#1e1e1e] after:content-['']">
             or
@@ -157,11 +156,17 @@ function QrCode({ activeQrModel, setActiveQrModel }) {
 }
 
 function QrCodeModel({ activeQrModel, setActiveQrModel }) {
+  const handleOnclose = (e) => {
+    setActiveQrModel(false);
+  };
+
   return (
     <>
       <AnimatePresence>
         {activeQrModel ? (
           <motion.div
+            id="wrapper"
+            onClick={handleOnclose}
             className="absolute grid h-full w-full place-content-center bg-[#101010] bg-opacity-90 text-white opacity-0 backdrop-blur-xl"
             animate={{
               opacity: 1,
@@ -171,18 +176,26 @@ function QrCodeModel({ activeQrModel, setActiveQrModel }) {
             }}
           >
             <div
-              onClick={() => setActiveQrModel(false)}
+              onClick={handleOnclose}
               className="absolute left-[25px] top-[25px] flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full bg-[#181818] p-3 text-sm duration-200 hover:scale-110"
             >
-              <span className="absolute inset-0 m-auto h-[1px] w-[20px] rotate-45 bg-[#777777]"></span>
-              <span className="absolute inset-0 m-auto h-[1px] w-[20px] -rotate-45 bg-[#777777]"></span>
+              <span className="absolute inset-0 m-auto h-[1px] w-[20px] rotate-45 bg-[#777777]" />
+              <span className="absolute inset-0 m-auto h-[1px] w-[20px] -rotate-45 bg-[#777777]" />
             </div>
-            <div className="w-[308px] rounded-[26px] border-[1px] border-[#383939] bg-[#181818] p-8">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="w-[308px] rounded-[26px] border-[1px] border-[#383939] bg-[#181818] p-8"
+            >
               <div className="">
                 <QrCodeSvg />
               </div>
             </div>
-            <p className="mt-3 text-center font-bold">Get the app</p>
+            <p
+              onClick={(e) => e.stopPropagation()}
+              className="mt-3 text-center font-bold"
+            >
+              Get the app
+            </p>
           </motion.div>
         ) : null}
       </AnimatePresence>
