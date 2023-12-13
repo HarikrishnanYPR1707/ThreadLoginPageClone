@@ -146,7 +146,7 @@ function QrCodeModel({ activeQrModel, setActiveQrModel }) {
   return (
     <>
       {activeQrModel ? (
-        <div className="absolute grid h-full w-full place-content-center bg-black bg-opacity-50 text-white backdrop-blur-xl">
+        <div className="absolute grid h-full w-full place-content-center bg-[#101010] bg-opacity-90 text-white backdrop-blur-xl">
           <div
             onClick={() => setActiveQrModel(false)}
             className="absolute left-[25px] top-[25px] flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full bg-[#181818] p-3 text-sm duration-200 hover:scale-110"
@@ -175,7 +175,7 @@ function ReportProblem({
   return (
     <>
       {activeReportProblemModel ? (
-        <div className="absolute grid h-full w-full place-content-center bg-black bg-opacity-50 text-white backdrop-blur-xl">
+        <div className="absolute grid h-full w-full place-content-center bg-[#101010] bg-opacity-90 text-white backdrop-blur-xl">
           <div
             onClick={() => setActiveReportProblemModel(false)}
             className="absolute left-[25px] top-[25px] flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full bg-[#181818] p-3 text-sm duration-200 hover:scale-110"
