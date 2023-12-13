@@ -3,12 +3,14 @@ import { GoPaperclip } from "react-icons/go";
 import QrCodeSvg from "../QrCode";
 import ThreadLogo from "../ThreadLogoSvg";
 import { data } from "../data";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Login() {
   const [activeQrModel, setActiveQrModel] = useState(false);
   const [activeReportProblemModel, setActiveReportProblemModel] =
     useState(false);
   const [reportProblemValue, setReportProblemValue] = useState("");
+  const [inputPasswordValue, setInputPasswordValue] = useState("");
 
   return (
     <main className="flex h-screen w-full flex-col items-center justify-center text-white">
@@ -22,15 +24,27 @@ function Login() {
         <div className="flex w-full flex-col items-center justify-center  ">
           <input
             type="text"
-            className="mb-2 w-full rounded-lg border-[#f3f5f7] bg-[#1e1e1e] p-4 text-[15px] text-sm text-white outline-none placeholder:text-[15px] placeholder:text-[#777777]  sm:rounded-xl"
+            className="mb-2 w-full rounded-lg border-[#f3f5f7] bg-[#1e1e1e] p-4 text-[15px] text-sm text-white outline-none placeholder:text-[15px] placeholder:text-[#777777] focus:outline-[1px] focus:outline-offset-0 focus:outline-[#383838] sm:rounded-xl"
             placeholder="Username, Phone number or email address"
           />
           <input
             type="password"
-            className="mb-2 w-full rounded-lg bg-[#1e1e1e] p-4 text-[15px] text-sm text-white outline-none placeholder:text-[15px] placeholder:text-[#777777] focus:outline-[1px] focus:outline-[#1e1e1e] sm:rounded-xl"
+            onChange={(e) => {
+              setInputPasswordValue(e.target.value);
+            }}
+            className="mb-2 w-full rounded-lg bg-[#1e1e1e] p-4 text-[15px] text-sm text-white outline-none placeholder:text-[15px] placeholder:text-[#777777] focus:outline-[1px] focus:outline-offset-0 focus:outline-[#383838] sm:rounded-xl"
             placeholder="Password"
           />
-          <button className="mb-4 w-full rounded-lg bg-white p-4 text-[15px] text-[#777777] outline-none sm:rounded-xl">
+          {/* <button className={inputPasswordValue.length > 0 ? "mb-4 w-full rounded-lg bg-white p-4 text-[15px] text-[#777777] outline-none sm:rounded-xl" : "mb-4 w-full rounded-lg bg-white p-4 text-[15px] text-[#777777] outline-none sm:rounded-xl"}>
+            Log in
+          </button> */}
+          <button
+            className={`mb-4 w-full rounded-lg bg-white p-4 text-[15px] outline-none sm:rounded-xl ${
+              inputPasswordValue.length > 0
+                ? "font-medium text-black"
+                : "text-[#777777]"
+            }`}
+          >
             Log in
           </button>
         </div>
@@ -74,7 +88,7 @@ function Login() {
 
 function ImageComponent() {
   return (
-    <div className="fixed top-0 -z-10 w-[1785px]">
+    <div className="fixed top-0 -z-10 hidden w-[1785px] sm:block">
       <img src="./Image.webp" alt="" />
     </div>
   );
@@ -145,23 +159,33 @@ function QrCode({ activeQrModel, setActiveQrModel }) {
 function QrCodeModel({ activeQrModel, setActiveQrModel }) {
   return (
     <>
-      {activeQrModel ? (
-        <div className="absolute grid h-full w-full place-content-center bg-[#101010] bg-opacity-90 text-white backdrop-blur-xl">
-          <div
-            onClick={() => setActiveQrModel(false)}
-            className="absolute left-[25px] top-[25px] flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full bg-[#181818] p-3 text-sm duration-200 hover:scale-110"
+      <AnimatePresence>
+        {activeQrModel ? (
+          <motion.div
+            className="absolute grid h-full w-full place-content-center bg-[#101010] bg-opacity-90 text-white opacity-0 backdrop-blur-xl"
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
           >
-            <span className="absolute inset-0 m-auto h-[1px] w-[20px] rotate-45 bg-[#777777]"></span>
-            <span className="absolute inset-0 m-auto h-[1px] w-[20px] -rotate-45 bg-[#777777]"></span>
-          </div>
-          <div className="w-[308px] rounded-[26px] border-[1px] border-[#383939] bg-[#181818] p-8">
-            <div className="">
-              <QrCodeSvg />
+            <div
+              onClick={() => setActiveQrModel(false)}
+              className="absolute left-[25px] top-[25px] flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full bg-[#181818] p-3 text-sm duration-200 hover:scale-110"
+            >
+              <span className="absolute inset-0 m-auto h-[1px] w-[20px] rotate-45 bg-[#777777]"></span>
+              <span className="absolute inset-0 m-auto h-[1px] w-[20px] -rotate-45 bg-[#777777]"></span>
             </div>
-          </div>
-          <p className="mt-3 text-center font-bold">Get the app</p>
-        </div>
-      ) : null}
+            <div className="w-[308px] rounded-[26px] border-[1px] border-[#383939] bg-[#181818] p-8">
+              <div className="">
+                <QrCodeSvg />
+              </div>
+            </div>
+            <p className="mt-3 text-center font-bold">Get the app</p>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }
@@ -174,42 +198,52 @@ function ReportProblem({
 }) {
   return (
     <>
-      {activeReportProblemModel ? (
-        <div className="absolute grid h-full w-full place-content-center bg-[#101010] bg-opacity-90 text-white backdrop-blur-xl">
-          <div
-            onClick={() => setActiveReportProblemModel(false)}
-            className="absolute left-[25px] top-[25px] flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full bg-[#181818] p-3 text-sm duration-200 hover:scale-110"
+      <AnimatePresence>
+        {activeReportProblemModel ? (
+          <motion.div
+            className="absolute grid h-full w-full place-content-center bg-[#101010] bg-opacity-90 text-white opacity-0 backdrop-blur-xl"
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
           >
-            <span className="absolute inset-0 m-auto h-[1px] w-[20px] rotate-45 bg-[#777777]"></span>
-            <span className="absolute inset-0 m-auto h-[1px] w-[20px] -rotate-45 bg-[#777777]"></span>
-          </div>
-          <div className="flex w-[400px] flex-col items-center justify-center">
-            <p className="mb-5 text-center font-bold">Report a problem</p>
-            <div className="w-full max-w-[390px] rounded-2xl border-[1px] border-[#383939] bg-[#181818] p-6">
-              <textarea
-                name="postContent"
-                onChange={(e) => {
-                  setReportProblemValue(e.target.value);
-                }}
-                placeholder="Please include as many detail as possible..."
-                className="mb-5 h-[101px] w-full resize-none border-none bg-[#181818] text-sm text-white outline-none placeholder:text-[#777777]"
-              />
-              <div className="flex w-full items-center justify-between">
-                <GoPaperclip className="cursor-pointer text-[#777777]" />
-                <button
-                  className={
-                    reportProblemValue.length > 0
-                      ? "rounded-lg border-[1px] border-[#777777] px-4 py-1 text-center font-medium text-white"
-                      : "rounded-lg border-[1px] border-[#444444] px-4 py-1 text-center font-medium text-[#777777]"
-                  }
-                >
-                  Submit
-                </button>
+            <div
+              onClick={() => setActiveReportProblemModel(false)}
+              className="absolute left-[25px] top-[25px] flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-full bg-[#181818] p-3 text-sm duration-200 hover:scale-110"
+            >
+              <span className="absolute inset-0 m-auto h-[1px] w-[20px] rotate-45 bg-[#777777]"></span>
+              <span className="absolute inset-0 m-auto h-[1px] w-[20px] -rotate-45 bg-[#777777]"></span>
+            </div>
+            <div className="flex w-[400px] flex-col items-center justify-center">
+              <p className="mb-5 text-center font-bold">Report a problem</p>
+              <div className="w-full max-w-[390px] rounded-2xl border-[1px] border-[#383939] bg-[#181818] p-6">
+                <textarea
+                  name="postContent"
+                  onChange={(e) => {
+                    setReportProblemValue(e.target.value);
+                  }}
+                  placeholder="Please include as many detail as possible..."
+                  className="mb-5 h-[101px] w-full resize-none border-none bg-[#181818] text-sm text-white outline-none placeholder:text-[#777777]"
+                />
+                <div className="flex w-full items-center justify-between">
+                  <GoPaperclip className="cursor-pointer text-[#777777]" />
+                  <button
+                    className={
+                      reportProblemValue.length > 0
+                        ? "rounded-lg border-[1px] border-[#777777] px-4 py-1 text-center font-medium text-white"
+                        : "rounded-lg border-[1px] border-[#444444] px-4 py-1 text-center font-medium text-[#777777]"
+                    }
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      ) : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }
